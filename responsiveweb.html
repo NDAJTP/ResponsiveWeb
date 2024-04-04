@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Feedback Survey</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Results Styles */
+        .results-container {
+            display: none;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+        .result-item label {
+            font-weight: bold;
+        }
+
+        .result-item span {
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>What Andi are you?</h1>
+        <form id="survey-form">
+            <div class="form-group">
+                <label for="question_1">How would you describe yourself?</label>
+                <select id="question_1" name="question_1">
+                    <option value="">Choose an option</option>
+                    <option value="answer_1">Funny</option>
+                    <option value="answer_2">Flirty</option>
+                    <option value="answer_3">Quiet</option>
+                    <option value="answer_4">Chaotic</option>
+                    <option value="answer_5">Drunk</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question_2">How would your friends describe you?</label>
+                <select id="question_2" name="question_2">
+                    <option value="">Choose an option</option>
+                    <option value="answer_1">Corny</option>
+                    <option value="answer_2">Single</option>
+                    <option value="answer_3">Mysterious</option>
+                    <option value="answer_4">Shameless</option>
+                    <option value="answer_5">Drunk</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question_3">What do you like to do in your free time?</label>
+                <select id="question_3" name="question_3">
+                    <option value="">Choose an option</option>
+                    <option value="answer_1">Disturb your friends</option>
+                    <option value="answer_2">Bebetime</option>
+                    <option value="answer_3">Sleep</option>
+                    <option value="answer_4">Make a shh post</option>
+                    <option value="answer_5">Drink</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question_4">You're given an assignment to create a responsive website, what will it be about?</label>
+                <select id="question_4" name="question_4">
+                    <option value="">Choose an option</option>
+                    <option value="answer_1">Wait 3 days before doing it</option>
+                    <option value="answer_2">"Are we soulmates?" survery</option>
+                    <option value="answer_3">Forget about it and whine about failing</option>
+                    <option value="answer_4">"What type of Andi are you?" survey</option>
+                    <option value="answer_5">"What alcohol are you?" survey</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comments">Any additional comments or suggestions?</label>
+                <textarea id="comments" name="comments" rows="4"></textarea>
+            </div>
+            <button type="button" onclick="showResults()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-container" id="results-container">
+        <h2>Survey Results</h2>
+        <div class="result-item" id="result_question_1">
+            <label>Question 1:</label>
+            <span></span>
+        </div>
+        <div class="result-item" id="result_question_2">
+            <label>Question 2:</label>
+            <span></span>
+        </div>
+        <div class="result-item" id="result_question_3">
+            <label>Question 3:</label>
+            <span></span>
+        </div>
+        <div class="result-item" id="result_question_4">
+            <label>Question 4:</label>
+            <span></span>
+        </div>
+        <div class="result-item" id="result_comments">
+            <label>Additional Comments:</label>
+            <span></span>
+        </div>
+    </div>
+
+    <script>
+        function showResults() {
+            // Get the values from the form
+            var question1 = document.getElementById("question_1").options[document.getElementById("question_1").selectedIndex].text;
+            var question2 = document.getElementById("question_2").options[document.getElementById("question_2").selectedIndex].text;
+            var question3 = document.getElementById("question_3").options[document.getElementById("question_3").selectedIndex].text;
+            var question4 = document.getElementById("question_4").options[document.getElementById("question_4").selectedIndex].text;
+            var comments = document.getElementById("comments").value;
+
+            // Check if any question is not answered
+            if (question1 === "Choose an option" || question2 === "Choose an option" || question3 === "Choose an option" || question4 === "Choose an option") {
+                alert("Please answer all the questions.");
+                return;
+            }
+
+            // Display the results in the results container
+            document.getElementById("result_question_1").getElementsByTagName("span")[0].textContent = question1;
+            document.getElementById("result_question_2").getElementsByTagName("span")[0].textContent = question2;
+            document.getElementById("result_question_3").getElementsByTagName("span")[0].textContent = question3;
+            document.getElementById("result_question_4").getElementsByTagName("span")[0].textContent = question4;
+            document.getElementById("result_comments").getElementsByTagName("span")[0].textContent = comments;
+
+            // Show the results container
+            document.getElementById("results-container").style.display = "block";
+        }
+    </script>
+</body>
+</html>
